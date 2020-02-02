@@ -44,7 +44,7 @@ func main() {
 		log.Fatal("--record is required")
 	}
 	if *token == "" {
-		log.Fatal("--record is required")
+		log.Fatal("--token is required")
 	}
 
 	log.WithFields(log.Fields{
