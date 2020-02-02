@@ -1,0 +1,28 @@
+apiVersion: batch/v1beta1
+kind: CronJob
+metadata:
+  name: dodyndns
+spec:
+  schedule: "0 0 * * *"
+  jobTemplate:
+    spec:
+      template:
+        spec:
+          containers:
+          - name: dodyndns
+            image: eddiezane/dodyndns:latest
+            args:
+            - "--domain"
+            - "example.com"
+            - "--record"
+            - "home"
+            - "--token"
+            - "$(TOKEN)"
+            env:
+            - name: TOKEN
+              valueFrom:
+                secretKeyRef:
+                  name: dodyndns
+                  key: token
+            imagePullPolicy: Always
+          restartPolicy: OnFailure
