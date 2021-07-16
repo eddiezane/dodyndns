@@ -19,9 +19,8 @@ I run this from a K3s cluster of Raspberry Pi 4's.
 To build it into an image I use Docker Buildx.
 
 ```
-docker buildx create --name dodyndns
-docker buildx inspect --bootstrap
-docker buildx build --platform linux/arm/v7 -t eddiezane/dodyndns:latest --push .
+docker buildx create --name dodyndns --use
+docker buildx build --platform linux/amd64,linux/arm64,linux/arm/v7,linux/arm/v6 -t eddiezane/dodyndns:latest --push .
 ```
 
 See [job.yml](job.yml) for an example manifest.
